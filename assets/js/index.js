@@ -15,16 +15,17 @@ const image = document.querySelector('.slide');
 const [prevBtn, nextBtn] = document.querySelectorAll(
   '.slider-container > button'
 );
-
-prevBtn.addEventListener('click', () => {
-  slider.currentIndex = slider.prev();
-  updateView();
-});
-
-nextBtn.addEventListener('click', () => {
-    slider.currentIndex = slider.next();
+const createSliderBtnHandler = (direction = 'next') => {
+  return () => {
+    slider.currentIndex =
+      slider[direction === 'next' ? 'nextSlide' : 'prevSlide'];
     updateView();
-})
+  };
+};
+
+prevBtn.addEventListener('click', createSliderBtnHandler('prev'));
+
+nextBtn.addEventListener('click', createSliderBtnHandler('next'));
 
 function updateView() {
   const { currentSlide } = slider;
