@@ -18,4 +18,3 @@ const testPars = document.getElementsByClassName('test');
 const par = document.querySelector('article > p');
 const pars = document.querySelectorAll('p');
 const pasrs = document.getElementsByTagName('p');
-
