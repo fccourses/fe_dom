@@ -30,13 +30,19 @@ updateView();
 
 const btn = document.querySelector('#uniq');
 
-function btnHandler() {
-  alert('You clicked the btn');
-
-  btn.removeEventListener('click', btnHandler);
+function btnHandler(eventObj) {
+  console.group();
+  console.dir(eventObj.currentTarget); // чей обработчик
+  console.dir(eventObj.target); // куда был клик
+  console.log(eventObj.target === btn);
+  console.groupEnd();
 }
 
 btn.addEventListener('click', btnHandler);
 
+document.body.addEventListener('click', btnHandler);
 
-btn.dispatchEvent(new MouseEvent('click'));
+document.addEventListener('click', btnHandler);
+window.addEventListener('click', btnHandler);
+
+// btn.dispatchEvent(new MouseEvent('click'));
