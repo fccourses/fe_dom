@@ -29,7 +29,7 @@ updateView();
 ///====================================================//
 
 const btn = document.querySelector('#uniq');
-
+/* 
 function btnHandler(eventObj) {
   console.group();
   console.dir(eventObj.currentTarget); // чей обработчик
@@ -37,12 +37,17 @@ function btnHandler(eventObj) {
   console.log(eventObj.target === btn);
   console.groupEnd();
 }
-
-btn.addEventListener('click', btnHandler);
-
-document.body.addEventListener('click', btnHandler);
-
-document.addEventListener('click', btnHandler);
-window.addEventListener('click', btnHandler);
-
+ */
+// btn.addEventListener('click', btnHandler);
 // btn.dispatchEvent(new MouseEvent('click'));
+
+/* 
+  По нажатию на кнопку - отобразить содержимое этой кнопки
+*/
+
+window.addEventListener('click', logBtnText);
+
+function logBtnText({ target, currentTarget }) {
+  console.dir(target);
+  console.dir(currentTarget);
+}
