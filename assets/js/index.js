@@ -9,27 +9,34 @@ const imagesDB = [
 ];
 
 const slider = new Slider(imagesDB);
-
 const image = document.querySelector('.slide');
-
 const [prevBtn, nextBtn] = document.querySelectorAll(
   '.slider-container > button'
 );
-
-const createSliderBtnHandlerHOF = (direction = 'next') => () => {
-  debugger;
+const createSliderBtnHandler = (direction = 'next') => () => {
   slider.currentIndex =
     slider[direction === 'next' ? 'nextSlide' : 'prevSlide'];
   updateView();
 };
-
 prevBtn.addEventListener('click', createSliderBtnHandler('prev'));
-
 nextBtn.addEventListener('click', createSliderBtnHandler('next'));
-
 function updateView() {
   const { currentSlide } = slider;
   image.setAttribute('src', currentSlide);
 }
-
 updateView();
+
+///====================================================//
+
+const btn = document.querySelector('#uniq');
+
+function btnHandler() {
+  alert('You clicked the btn');
+
+  btn.removeEventListener('click', btnHandler);
+}
+
+btn.addEventListener('click', btnHandler);
+
+
+btn.dispatchEvent(new MouseEvent('click'));
