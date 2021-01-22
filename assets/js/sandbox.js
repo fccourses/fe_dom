@@ -33,12 +33,6 @@ adder(100) //170
 
 */
 
-function createAdder(initialState) {
-  let state = initialState;
+const createAdder = (n) => (m) => (n += m);
 
-  return function (value) {
-    return state = value + state;
-  };
-  
-}
 const adder = createAdder(100);
