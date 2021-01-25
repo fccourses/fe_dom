@@ -7,13 +7,17 @@ for (const btn of btns) {
     'click',
     ({
       target: {
-        dataset: { address },
-        dataset
+        dataset: { color },
+        parentNode: localDiv,
       },
     }) => {
-      console.dir(dataset.testKey);
-      console.dir(dataset.className); // wrong
-      console.dir(dataset.classname); // right
+      localDiv.style.backgroundColor = color;
     }
   );
 }
+/* 1.1 По клику на кнопку менять bgColor у div#root */
+/* 1.2 без глобальных переменных */
+
+// Изменение стиля в html
+/* elt.style.color = 'blue' */
+/* elt.style = "color: blue;" */
