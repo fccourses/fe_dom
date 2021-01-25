@@ -8,9 +8,12 @@ for (const btn of btns) {
     ({
       target: {
         dataset: { address },
+        dataset
       },
     }) => {
-      console.dir(address);
+      console.dir(dataset.testKey);
+      console.dir(dataset.className); // wrong
+      console.dir(dataset.classname); // right
     }
   );
 }
