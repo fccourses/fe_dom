@@ -23,7 +23,6 @@ const clickHandler = ({ target: { textContent } }) => {
 };
 
 closeBtn.addEventListener('mouseenter', switcher);
-openBtn.addEventListener('mouseenter', switcher);
 
 closeBtn.addEventListener('click', clickHandler);
 openBtn.addEventListener('click', clickHandler);
