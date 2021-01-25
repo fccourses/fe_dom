@@ -1,11 +1,8 @@
 'use strict';
 
-let i = 0;
 
-const [firstBtn] = document.getElementsByTagName('button');
+/* 
+Поменять местами содержимое 
+двух кнопок по наведению.
+*/
 
-function alertWithMessage() {
-  alert('Achievement Unlocked!');
-}
-
-firstBtn.addEventListener('click', alertWithMessage);
