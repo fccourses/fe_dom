@@ -1,32 +1,24 @@
 'use strict';
 
-const btns = document.querySelectorAll('button');
+const btn = document.querySelector('button');
+const div = document.querySelector('#root');
 
-// Variant 1
-/* for (const btn of btns) {
-  btn.addEventListener(
-    'click',
-    ({
-      target: {
-        dataset: { color },
-        parentNode: localDiv,
-      },
-    }) => {
-      localDiv.style.backgroundColor = color;
-    }
-  );
-} */
-
-//Variant 2
-const eventHandler = ({
-  target: {
-    dataset: { color },
-    parentNode: localDiv,
-  },
-}) => {
-  localDiv.style.backgroundColor = color;
+const clickhandler = (e) => {
+  console.dir(e.currentTarget);
 };
 
-for (const btn of btns) {
-  btn.addEventListener('click', eventHandler);
-}
+btn.addEventListener('click', clickhandler, true);
+div.addEventListener(
+  'click',
+  () => {
+    console.log('одноразовый обратчик я');
+  },
+  {
+    once: true,
+  }
+);
+document.body.addEventListener('click', clickhandler);
+window.addEventListener('click', clickhandler, {
+  capture: true,
+});
+/* квадрат числа из инпута */
