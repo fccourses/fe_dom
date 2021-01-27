@@ -1,10 +1,8 @@
 'use strict';
 
 const cardContainer = document.getElementById('root');
-
-const HTMLLIElements = data.map((place) => createPlaceCards(place));
-
-cardContainer.append(...HTMLLIElements);
+const cards = data.map((place) => createPlaceCards(place));
+cardContainer.append(...cards);
 
 function createPlaceCards(place) {
   const card = document.createElement('li');
@@ -47,7 +45,6 @@ function createImage({ name, profilePicture }, { className }) {
   img.classList.add(className);
   img.setAttribute('alt', name);
   img.setAttribute('src', profilePicture);
-
   img.addEventListener('error', handleImageError);
   return img;
 }
