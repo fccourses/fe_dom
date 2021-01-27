@@ -36,16 +36,20 @@ function createImageWrapper(place) {
   initials.classList.add('initials');
   initials.append(document.createTextNode(name[0] || ''));
 
-  imageWrapper.append(initials, createImage(place, { className: 'cardImage' }));
+  createImage(place, { className: 'cardImage' });
+
+  imageWrapper.append(initials);
   return imageWrapper;
 }
 
 function createImage({ name, profilePicture }, { className }) {
   const img = document.createElement('img');
+  img.hidden = true;
   img.classList.add(className);
   img.setAttribute('alt', name);
   img.setAttribute('src', profilePicture);
   img.addEventListener('error', handleImageError);
+  img.addEventListener('load', handleImageLoad);
   return img;
 }
 
@@ -57,6 +61,12 @@ function createImage({ name, profilePicture }, { className }) {
 
 function handleImageError({ target }) {
   target.remove();
+}
+
+function handleImageLoad(e) {
+  /* 
+    append img 
+  */
 }
 
 /* 
