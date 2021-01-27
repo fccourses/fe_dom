@@ -13,23 +13,6 @@ function createPlaceCards(place) {
   const container = document.createElement('article');
   container.classList.add('cardContainer');
 
-  const imageWrapper = document.createElement('div');
-  imageWrapper.classList.add('cardImageWrapper');
-  imageWrapper.style.backgroundColor = stringToColour(place.name);
-
-  const initials = document.createElement('div');
-  initials.classList.add('initials');
-  initials.append(document.createTextNode(place.name[0] || ''));
-
-  const img = document.createElement('img');
-  img.classList.add('cardImage');
-  img.setAttribute('alt', place.name);
-  img.setAttribute('src', place.profilePicture);
-
-  img.addEventListener('error', handleImageError);
-
-  imageWrapper.append(initials, img);
-
   const name = document.createElement('h3');
   name.classList.add('cardName');
   // name.textContent = place.name;
@@ -39,9 +22,34 @@ function createPlaceCards(place) {
   description.classList.add('cardDescription');
   description.append(document.createTextNode(place.description));
 
-  container.append(imageWrapper, name, description);
+  container.append(createImageWrapper(place), name, description);
   card.append(container);
   return card;
+}
+
+function createImageWrapper(place) {
+  const { name } = place;
+
+  const imageWrapper = document.createElement('div');
+  imageWrapper.classList.add('cardImageWrapper');
+  imageWrapper.style.backgroundColor = stringToColour(name);
+
+  const initials = document.createElement('div');
+  initials.classList.add('initials');
+  initials.append(document.createTextNode(name[0] || ''));
+
+  imageWrapper.append(initials, createImage(place, { className: 'cardImage' }));
+  return imageWrapper;
+}
+
+function createImage({ name, profilePicture }, { className }) {
+  const img = document.createElement('img');
+  img.classList.add(className);
+  img.setAttribute('alt', name);
+  img.setAttribute('src', profilePicture);
+
+  img.addEventListener('error', handleImageError);
+  return img;
 }
 
 /* 
