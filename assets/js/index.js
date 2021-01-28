@@ -5,35 +5,27 @@ const cards = data.map((place) => createPlaceCards(place));
 cardContainer.append(...cards);
 
 function createPlaceCards(place) {
-  return createElement('li', { classNames: ['cardWrapper'] }, [
-    createElement('article', { classNames: ['cardContainer'] }, [
-      createImageWrapper(place),
-      createElement('h3', { classNames: ['cardName'] }, [
-        document.createTextNode(place.name || ''),
-      ]),
-      createElement('p', { classNames: ['cardDescription'] }, [
-        document.createTextNode(place.description),
-      ]),
-    ]),
-  ]);
+  const p = createElement(
+    'p',
+    { classNames: ['cardDescription'] },
+    document.createTextNode(place.description)
+  );
 
-  /*   const card = document.createElement('li');
-  card.classList.add('cardWrapper');
+  const h3 = createElement(
+    'h3',
+    { classNames: ['cardName'] },
+    document.createTextNode(place.name || '')
+  );
 
-  const container = document.createElement('article');
-  container.classList.add('cardContainer');
+  const article = createElement(
+    'article',
+    { classNames: ['cardContainer'] },
+    createImageWrapper(place),
+    h3,
+    p
+  );
 
-  const name = document.createElement('h3');
-  name.classList.add('cardName');
-  name.append(document.createTextNode(place.name || ''));
-
-  const description = document.createElement('p');
-  description.classList.add('cardDescription');
-  description.append(document.createTextNode(place.description));
-
-  container.append(createImageWrapper(place), name, description);
-  card.append(container); */
-  // return card;
+  return createElement('li', { classNames: ['cardWrapper'] }, article);
 }
 
 function createImageWrapper(place) {
@@ -74,7 +66,7 @@ function createImage({ name, profilePicture, id }, { className }) {
  * @param {Node[]} children
  * @return {HTMLElement}
  */
-function createElement(type, { classNames, onClick }, children) {
+function createElement(type, { classNames, onClick }, ...children) {
   const elem = document.createElement(type);
   elem.classList.add(...classNames);
   elem.onclick = onClick;
