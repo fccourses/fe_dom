@@ -13,7 +13,6 @@ function createPlaceCards(place) {
 
   const name = document.createElement('h3');
   name.classList.add('cardName');
-  // name.textContent = place.name;
   name.append(document.createTextNode(place.name || ''));
 
   const description = document.createElement('p');
@@ -26,15 +25,16 @@ function createPlaceCards(place) {
 }
 
 function createImageWrapper(place) {
-  const { name } = place;
+  const { name, id } = place;
 
   const imageWrapper = document.createElement('div');
+  imageWrapper.setAttribute('id', `wrapper${id}`);
   imageWrapper.classList.add('cardImageWrapper');
   imageWrapper.style.backgroundColor = stringToColour(name);
 
   const initials = document.createElement('div');
   initials.classList.add('initials');
-  initials.append(document.createTextNode(name[0] || ''));
+  initials.append(document.createTextNode(name.trim().charAt(0) || ''));
 
   createImage(place, { className: 'cardImage' });
 
@@ -42,10 +42,10 @@ function createImageWrapper(place) {
   return imageWrapper;
 }
 
-function createImage({ name, profilePicture }, { className }) {
+function createImage({ name, profilePicture, id }, { className }) {
   const img = document.createElement('img');
-  img.hidden = true;
   img.classList.add(className);
+  img.dataset.id = id;
   img.setAttribute('alt', name);
   img.setAttribute('src', profilePicture);
   img.addEventListener('error', handleImageError);
@@ -54,25 +54,24 @@ function createImage({ name, profilePicture }, { className }) {
 }
 
 /* 
-
   EVENT HANDLERS
-
 */
 
 function handleImageError({ target }) {
   target.remove();
 }
 
-function handleImageLoad(e) {
-  /* 
-    append img 
-  */
+function handleImageLoad({
+  target,
+  target: {
+    dataset: { id },
+  },
+}) {
+  document.getElementById(`wrapper${id}`).append(target);
 }
 
 /* 
-
   UTILS
-
 */
 
 function stringToColour(str) {

@@ -61,9 +61,7 @@
   font-weight: bold;
 }
 
-.cardName:empty::after {
+.cardName:empty::after,
+.initials:empty::after {
   content: "Unknown";
-}
-
-.cardDescription {
 }
