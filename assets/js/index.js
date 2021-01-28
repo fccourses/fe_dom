@@ -5,7 +5,19 @@ const cards = data.map((place) => createPlaceCards(place));
 cardContainer.append(...cards);
 
 function createPlaceCards(place) {
-  const card = document.createElement('li');
+  return createElement('li', { classNames: ['cardWrapper'] }, [
+    createElement('article', { classNames: ['cardContainer'] }, [
+      createImageWrapper(place),
+      createElement('h3', { classNames: ['cardName'] }, [
+        document.createTextNode(place.name || ''),
+      ]),
+      createElement('p', { classNames: ['cardDescription'] }, [
+        document.createTextNode(place.description),
+      ]),
+    ]),
+  ]);
+
+  /*   const card = document.createElement('li');
   card.classList.add('cardWrapper');
 
   const container = document.createElement('article');
@@ -20,8 +32,8 @@ function createPlaceCards(place) {
   description.append(document.createTextNode(place.description));
 
   container.append(createImageWrapper(place), name, description);
-  card.append(container);
-  return card;
+  card.append(container); */
+  // return card;
 }
 
 function createImageWrapper(place) {
@@ -51,6 +63,23 @@ function createImage({ name, profilePicture, id }, { className }) {
   img.addEventListener('error', handleImageError);
   img.addEventListener('load', handleImageLoad);
   return img;
+}
+
+/**
+ *
+ * @param {string} type
+ * @param {object} options
+ * @param {string[]} options.classNames - css classes
+ * @param {function} options.onClick - click handler
+ * @param {Node[]} children
+ * @return {HTMLElement}
+ */
+function createElement(type, { classNames, onClick }, children) {
+  const elem = document.createElement(type);
+  elem.classList.add(...classNames);
+  elem.onclick = onClick;
+  elem.append(...children);
+  return elem;
 }
 
 /* 
