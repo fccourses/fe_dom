@@ -32,21 +32,27 @@ function createListElement(inputValue) {
   const li = document.createElement('li');
   const liContent = document.createTextNode(inputValue);
 
-  li.append(liContent, createDeleteButton(deleteHandler.bind(li)));
+  li.append(liContent, createDeleteButton(deleteHandler.bind(li), inputValue));
   return li;
 }
 
-function createDeleteButton(onDelete) {
+function createDeleteButton(onDelete, inputValue) {
   const btn = document.createElement('button');
+  btn.dataset.value = inputValue;
   btn.textContent = 'X';
   btn.addEventListener('click', onDelete);
   return btn;
 }
 
 function deleteHandler(e) {
+  const {
+    target: {
+      dataset: { value },
+    },
+  } = e;
+  
   this.remove(); // fix 1
-  const index = state.indexOf(e.target.parentNode.firstChild.textContent);
-  state.splice(index, 1);
+  state.splice(state.indexOf(value), 1);
 }
 
 /*
