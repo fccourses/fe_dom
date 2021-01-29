@@ -63,5 +63,14 @@
 
 .cardName:empty::after,
 .initials:empty::after {
-  content: "Unknown";
+  content: 'Unknown';
+}
+
+.ico {
+  color: grey;
+  background-color: white;
+}
+
+.ico:hover {
+  background-color: red;
 }
