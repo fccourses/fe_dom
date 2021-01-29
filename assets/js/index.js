@@ -57,23 +57,6 @@ function createImage({ name, profilePicture, id }, { className }) {
   return img;
 }
 
-/**
- *
- * @param {string} type
- * @param {object} options
- * @param {string[]} options.classNames - css classes
- * @param {function} options.onClick - click handler
- * @param {Node[]} children
- * @return {HTMLElement}
- */
-function createElement(type, { classNames, onClick }, ...children) {
-  const elem = document.createElement(type);
-  elem.classList.add(...classNames);
-  elem.onclick = onClick;
-  elem.append(...children);
-  return elem;
-}
-
 /* 
   EVENT HANDLERS
 */
@@ -106,4 +89,26 @@ function stringToColour(str) {
     colour += ('00' + value.toString(16)).substr(-2);
   }
   return colour;
+}
+
+/* 
+
+  LIB
+
+*/
+/**
+ *
+ * @param {string} type
+ * @param {object} options
+ * @param {string[]} options.classNames - css classes
+ * @param {function} options.onClick - click handler
+ * @param {Node[]} children
+ * @return {HTMLElement}
+ */
+function createElement(type, { classNames, onClick }, ...children) {
+  const elem = document.createElement(type);
+  elem.classList.add(...classNames);
+  elem.onclick = onClick;
+  elem.append(...children);
+  return elem;
 }
