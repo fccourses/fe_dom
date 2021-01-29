@@ -108,7 +108,7 @@ function stringToColour(str) {
  */
 function createElement(
   type = 'div',
-  { classNames = [], onClick = null, attributes = {} }={},
+  { classNames = [], onClick = null, attributes = {} } = {},
   ...children
 ) {
   /*
@@ -127,4 +127,17 @@ function createElement(
   elem.onclick = onClick;
   elem.append(...children);
   return elem;
+}
+
+function createContacts(contacts = []) {
+  return contacts
+    .map((contactLink) => {
+      /* 
+    Magic 
+    new URL(contackLInk) -> hostname
+    map.get(hostname) - > src
+    return  createElem(img,{attributes:{src,alt:'contact'}})
+    */
+    })
+    .filter(Boolean);
 }
